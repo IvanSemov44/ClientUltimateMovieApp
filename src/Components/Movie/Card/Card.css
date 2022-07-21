@@ -1,0 +1,6 @@
+.cardImg{
+    max-width: 100px;
+    height: 180px;
+    /*background: url("images/card-back.jpg") no-repeat;*/
+    display: inline-block;
+}
