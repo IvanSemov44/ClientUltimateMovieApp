@@ -1,10 +1,7 @@
-//import logo from './logo.svg';
 import React from "react";
+import {Routes,Route} from 'react-router-dom';
 import CardCom from './Components/Movie/Card/Card';
 import Create from './Components/Movie/Create/Create';
-//mport {MenuHeader}  from "./Components/MenuHeader/MenuHeader";
-//import './App.css';
-//import * as Movie from "./service/MovieService";
 import MenuHeader from './Components/MenuHeader/MenuHeader'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,8 +10,11 @@ function App() {
   return (
     <div className="App">
       <MenuHeader />
-      <CardCom />
-      <Create/>
+
+      <Routes>
+        <Route path="/*" element={<CardCom/>} />
+        <Route path="/create" element = {<Create/>}/>
+      </Routes>
     </div>
   );
 }

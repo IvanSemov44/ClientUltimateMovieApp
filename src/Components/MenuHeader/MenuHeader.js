@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { LinkContainer } from "react-router-bootstrap";
 
 function OffcanvasExample() {
     return (
@@ -14,13 +15,16 @@ function OffcanvasExample() {
                 <Navbar key={expand} bg="light" expand={expand} className="mb-3">
                     <Container fluid>
                         <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
-
-                        <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                            Catalog
-                        </Offcanvas.Title>
-                        <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                            Create
-                        </Offcanvas.Title>
+                        <LinkContainer type="button" to="/Catalog">
+                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                Catalog
+                            </Offcanvas.Title>
+                        </LinkContainer>
+                        <LinkContainer type="button" to="/Create">
+                            <Offcanvas.Title href='/Create' id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                Create
+                            </Offcanvas.Title>
+                        </LinkContainer>
                         <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                             My Movie
                         </Offcanvas.Title>

@@ -1,7 +1,7 @@
 
 const url = "http://localhost:5162/api/movie/";
 
-const header = { 'Content-Type': 'application/json' }
+const header = { 'Content-Type': 'application/json' };
 
 export const getAllMovie = () => {
 
