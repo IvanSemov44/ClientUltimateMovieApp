@@ -1,0 +1,5 @@
+.div-catalog-movie{
+    display: flex;
+    flex: wrap;
+    justify-content:space-evenly;
+}

@@ -2,20 +2,26 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { LinkContainer } from 'react-router-bootstrap';
-const img = "https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg";
+import './Card.css';
 
 
-function CardCom() {
+
+function CardCom({
+    data
+}) {
+    let img = "https://media.comicbook.com/files/img/default-movie.png";
+    if(data.ImageUrl !== "") {
+        img = data.imageUrl;
+    }
+    
     return (
         <Card bg="dark" text="white" style={{ width: '18rem' }}>
             <Card.Img className="cardImg" variant="top" src={img} />
             <Card.Body>
-                <Card.Title>Title</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                <Card.Title>{data.title}({data.year})</Card.Title>
+                <Card.Text bsPrefix='newClassForText'>{data.descriptions}
                 </Card.Text>
-                <LinkContainer type="button" to="/View">
+                <LinkContainer to={"/view/"+data.id}>
                     <Button variant="outline-light" text="grey">View</Button>
                 </LinkContainer>
             </Card.Body>
