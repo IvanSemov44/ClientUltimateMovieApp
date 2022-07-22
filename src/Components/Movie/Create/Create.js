@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import * as MovieService from '../../../service/MovieService';
+import "../Create/Create.css";
 
 function Create() {
     const [title, setTitle] = useState();
@@ -40,7 +41,7 @@ function Create() {
 
 
     return (
-        <Form onSubmit={OnSubmit}>
+        <Form className= "form-create-movie" bg="blue" border = "dark" onSubmit={OnSubmit}>
             <Form.Group className="mb-3" controlId="title">
                 <Form.Label>Title</Form.Label>
                 <Form.Control type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
@@ -86,7 +87,7 @@ function Create() {
                 <Form.Control type="text" placeholder="Category" onChange={(e => setCategory(e.target.value))} />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="overline-dark"  type="submit" size="lg">
                 Create
             </Button>
         </Form>

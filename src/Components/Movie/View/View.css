@@ -1,0 +1,27 @@
+div-viewItem{
+    align-items: center;
+}
+.card-subtitle{
+    padding:10px;
+    text-align: left;
+}
+
+.imgView {
+    /* max-width: 350px;
+    height: 500px; */
+    /*background: url("images/card-back.jpg") no-repeat;*/
+    display: inline-block;
+
+}
+
+.card-view{
+    margin-inline: 15%;
+    align-items: center;
+    padding-inline:6%;
+}
+
+.card-view-header{
+    font-size:30px;
+    margin-top:3%;
+    margin-bottom: 50px;
+}

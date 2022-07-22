@@ -14,26 +14,34 @@ function OffcanvasExample() {
             {['xxl'].map((expand) => (
                 <Navbar key={expand} bg="light" expand={expand} className="mb-3">
                     <Container fluid>
-                        <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
+                        <LinkContainer type="button" to="/">
+                            <Navbar.Brand>Navbar Offcanvas</Navbar.Brand>
+                        </LinkContainer>
+
                         <LinkContainer type="button" to="/Catalog">
                             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                                 Catalog
                             </Offcanvas.Title>
                         </LinkContainer>
+
                         <LinkContainer type="button" to="/Create">
-                            <Offcanvas.Title href='/Create' id={`offcanvasNavbarLabel-expand-${expand}`}>
+                            <Offcanvas.Title  id={`offcanvasNavbarLabel-expand-${expand}`}>
                                 Create
                             </Offcanvas.Title>
                         </LinkContainer>
+
                         <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                             My Movie
                         </Offcanvas.Title>
+
                         <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                             Login
                         </Offcanvas.Title>
+
                         <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                             Register
                         </Offcanvas.Title>
+
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}
