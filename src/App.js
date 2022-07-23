@@ -4,6 +4,8 @@ import Catalog from './Components/Movie/Catalog/Catalog';
 import Create from './Components/Movie/Create/Create';
 import View from './Components/Movie/View/View';
 import Edit from './Components/Movie/Edit/Edit';
+import Login from './Components/User/Login/Login';
+import Register from './Components/User/Register/Register';
 import MenuHeader from './Components/MenuHeader/MenuHeader'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,6 +24,9 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/view/:movieId" element={<View />} />
         <Route path="/edit/:movieId" element={<Edit />} />
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </div>
   );

@@ -1,5 +1,6 @@
 .div-catalog-movie{
     display: flex;
-    flex: wrap;
+    flex-wrap:wrap;
+    gap:20px 30px;
     justify-content:space-evenly;
 }

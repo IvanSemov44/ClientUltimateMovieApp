@@ -102,7 +102,7 @@ function Create() {
                 <Form.Control type="text" placeholder="trailer" onChange={(e => setSubtitle(e.target.value))} />
             </Form.Group>
 
-            <Button variant="overline-dark" type="submit" size="lg">
+            <Button variant="outline-light" type="submit" size="lg">
                 Create
             </Button>
         </Form>
