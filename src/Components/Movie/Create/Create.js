@@ -1,111 +1,253 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import * as MovieService from '../../../service/MovieService';
 import "../Create/Create.css";
 
 function Create() {
-    const [title, setTitle] = useState();
-    const [year, setYear] = useState();
-    const [creator, setCreater] = useState();
-    const [actors, setActors] = useState();
-    const [country, setCountry] = useState();
-    const [image, setImage] = useState();
-    const [descriptions, setDescriptions] = useState();
-    const [downloadons, setDownload] = useState();
-    const [category, setCategory] = useState();
-    const [trailer, setTrailer] = useState();
-    const [subtitle, setSubtitle] = useState();
     const navigate = useNavigate();
-
-    function OnSubmit(e) {
-        e.preventDefault();
-        const data = {
-            title,
-            year,
-            creator,
-            actors,
-            country,
-            imageUrl:image,
-            descriptions,
-            downloadUrl:downloadons,
-            category,
-            subtitleUrl:subtitle,
-            trailerUrl:trailer
-        };
-        console.log(data);
-
-        MovieService.createMovie(data)
-            .then(response => {
-                navigate('/')
-            });
-
-    };
-
 
 
     return (
-        <Form className="form-create-movie" bg="blue" border="dark" onSubmit={OnSubmit}>
-            <Form.Group className="mb-3" controlId="title">
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
-            </Form.Group>
+        <Formik
+            initialValues={{
+                title: '',
+                year: '2022',
+                creator: '',
+                actors: '',
+                descriptions: '',
+                imageUrl: '',
+                downloadUrl: '',
+                country: '',
+                category: '',
+                trailerUrl: '',
+                subtitleUrl: '',
+            }}
+            validationSchema={
+                Yup.object({
+                    title: Yup.string()
+                        .max(100, 'Must be 15 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    year: Yup.number()
+                        .max(2022, 'Must be 2022 year or less')
+                        .min(1900, 'Must be 1900 year or more')
+                        .required('Required'),
+                    creator: Yup.string()
+                        .max(100, 'Must be 100 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    actors: Yup.string()
+                        .max(100, 'Must be 100 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    descriptions: Yup.string()
+                        .max(1000, 'Must be 1000 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    imageUrl: Yup.string()
+                        .max(1000, 'Must be 1000 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    downloadUrl: Yup.string()
+                        .max(1000, 'Must be 1000 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    country: Yup.string()
+                        .max(100, 'Must be 100 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    category: Yup.string()
+                        .max(100, 'Must be 100 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    trailerUrl: Yup.string()
+                        .max(1000, 'Must be 1000 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    subtitleUrl: Yup.string()
+                        .max(1000, 'Must be 1000 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
 
-            <Form.Group className="mb-3" controlId="year">
-                <Form.Label>Year</Form.Label>
-                <Form.Control type="number" placeholder="Year" onChange={(e => setYear(e.target.value))} />
-            </Form.Group>
+                })}
+            onSubmit={(values, { setSubmiting }) => {
+                MovieService.createMovie(values)
+                    .then(response => {
+                        console.log(response)
+                        navigate(`/view/${response.id}`, { replace: false })
+                    });
+                setSubmiting(false);
+            }}
+        >
+            {formik => (
+                <Form className="form-create-movie" bg="blue" border="dark" onSubmit={formik.handleSubmit}>
 
-            <Form.Group className="mb-3" controlId="creater">
-                <Form.Label>Creater</Form.Label>
-                <Form.Control type="text" placeholder="Creater" onChange={(e => setCreater(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control
+                            id="title"
+                            type="text"
+                            name="title"
+                            {...formik.getFieldProps('title')}
+                            isInvalid={formik.touched.title && formik.errors.title}
+                            isValid={formik.touched.title && !formik.errors.title}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.title}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="actors">
-                <Form.Label>Actors</Form.Label>
-                <Form.Control type="text" placeholder="Actors" onChange={(e => setActors(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Year</Form.Label>
+                        <Form.Control
+                            id="year"
+                            type="number"
+                            min="1900"
+                            max="2022"
+                            name="year"
+                            {...formik.getFieldProps('year')}
+                            isInvalid={formik.touched.year && formik.errors.year}
+                            isValid={formik.touched.year && !formik.errors.year}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.firstName}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="descriptions">
-                <Form.Label>Descriptions</Form.Label>
-                <Form.Control type="text" placeholder="Descriptions" onChange={(e => setDescriptions(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Creator</Form.Label>
+                        <Form.Control
+                            id="creator"
+                            type="text"
+                            name="creator"
+                            {...formik.getFieldProps('creator')}
+                            isInvalid={formik.touched.creator && formik.errors.creator}
+                            isValid={formik.touched.creator && !formik.errors.creator}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.creator}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="imageUrk">
-                <Form.Label>Image Url</Form.Label>
-                <Form.Control type="text" placeholder="Image" onChange={(e => setImage(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Actors</Form.Label>
+                        <Form.Control
+                            id="actors"
+                            type="text"
+                            name="actors"
+                            {...formik.getFieldProps('actors')}
+                            isInvalid={formik.touched.actors && formik.errors.actors}
+                            isValid={formik.touched.actors && !formik.errors.actors}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.actors}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="downloadUrl">
-                <Form.Label>Download Url</Form.Label>
-                <Form.Control type="text" placeholder="Download" onChange={(e => setDownload(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Descriptions</Form.Label>
+                        <Form.Control
+                            id="descriptions"
+                            type="text"
+                            name="descriptions"
+                            {...formik.getFieldProps('descriptions')}
+                            isInvalid={formik.touched.descriptions && formik.errors.descriptions}
+                            isValid={formik.touched.descriptions && !formik.errors.descriptions}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.descriptions}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="country">
-                <Form.Label>Country</Form.Label>
-                <Form.Control type="text" placeholder="Country" onChange={(e => setCountry(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Image Url</Form.Label>
+                        <Form.Control
+                            id="imageUrl"
+                            type="text"
+                            name="imageUrl"
+                            {...formik.getFieldProps('imageUrl')}
+                            isInvalid={formik.touched.imageUrl && formik.errors.imageUrl}
+                            isValid={formik.touched.imageUrl && !formik.errors.imageUrl}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.imageUrl}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="category">
-                <Form.Label>Category</Form.Label>
-                <Form.Control type="text" placeholder="Category" onChange={(e => setCategory(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Download Url</Form.Label>
+                        <Form.Control
+                            id="downloadUrl"
+                            type="text"
+                            name="downloadUrl"
+                            {...formik.getFieldProps('downloadUrl')}
+                            isInvalid={formik.touched.downloadUrl && formik.errors.downloadUrl}
+                            isValid={formik.touched.downloadUrl && !formik.errors.downloadUrl}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.downloadUrl}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="trailer">
-                <Form.Label>Trailer Url</Form.Label>
-                <Form.Control type="text" placeholder="trailer" onChange={(e => setTrailer(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Country</Form.Label>
+                        <Form.Control
+                            id="country"
+                            type="text"
+                            name="country"
+                            {...formik.getFieldProps('country')}
+                            isInvalid={formik.touched.country && formik.errors.country}
+                            isValid={formik.touched.country && !formik.errors.country}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.country}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="subtitle">
-                <Form.Label>Subtitle Url</Form.Label>
-                <Form.Control type="text" placeholder="trailer" onChange={(e => setSubtitle(e.target.value))} />
-            </Form.Group>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Category</Form.Label>
+                        <Form.Control
+                            id="category"
+                            type="text"
+                            name="category"
+                            {...formik.getFieldProps('category')}
+                            isInvalid={formik.touched.category && formik.errors.category}
+                            isValid={formik.touched.category && !formik.errors.category}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.category}</Form.Control.Feedback>
+                    </Form.Group>
 
-            <Button variant="outline-light" type="submit" size="lg">
-                Create
-            </Button>
-        </Form>
+                    <Form.Group className="position-relative">
+                        <Form.Label>Trailer Url</Form.Label>
+                        <Form.Control
+                            id="trailerUrl"
+                            type="text"
+                            name="trailerUrl"
+                            {...formik.getFieldProps('trailerUrl')}
+                            isInvalid={formik.touched.trailerUrl && formik.errors.trailerUrl}
+                            isValid={formik.touched.trailerUrl && !formik.errors.trailerUrl}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.trailerUrl}</Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group className="position-relative">
+                        <Form.Label>Subtitle Url</Form.Label>
+                        <Form.Control
+                            id="subtitleUrl"
+                            type="text"
+                            name="subtitleUrl"
+                            {...formik.getFieldProps('subtitleUrl')}
+                            isInvalid={formik.touched.subtitleUrl && formik.errors.subtitleUrl}
+                            isValid={formik.touched.subtitleUrl && !formik.errors.subtitleUrl}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.subtitleUrl}</Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Button variant="outline-light" type="submit" size="lg">
+                        Create
+                    </Button>
+                </Form>
+            )}
+        </Formik >
     );
 };
 
