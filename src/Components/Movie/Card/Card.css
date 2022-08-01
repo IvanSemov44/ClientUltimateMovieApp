@@ -1,13 +1,14 @@
-/* .cardImg {
-    max-width: 100px;
-    height: 180px;
-    background: url("images/card-back.jpg") no-repeat;
-    display: inline-block;
-} */
+.cardImg {
+    /* max-width: 100px; */
+    max-height: 250px;
+    /* background: url("images/card-back.jpg") no-repeat;
+    display: inline-block; */
+}
 
 .newClassForText{
-    max-height: 293px;
+    max-height: 130px;
     overflow: hidden;
+    font-size: 12px;
 }
 .imgItem{
     max-width: 300px;

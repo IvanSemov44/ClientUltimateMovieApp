@@ -25,12 +25,12 @@ function View() {
     function OnDelete(e) {
         e.preventDefault();
         movieService.deleteMovie(movieId);
-        navigate('/');
+        navigate('/', { replace: true });
     }
 
     return (
         <div className="div-viewItem">
-            <Card bg="dark" text="white" className="card-view" style={{ width: '45rem' }}>
+            <Card bg="dark" text="white" className="card-view" style={{ width: '45rem'}}>
                 <Card.Header className="card-view-header" size="xxl">{movie.title} ({movie.year})</Card.Header>
 
                 {

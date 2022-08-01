@@ -38,9 +38,11 @@ function OffcanvasExample() {
                             Login
                         </Offcanvas.Title>
 
-                        <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                        <LinkContainer type="button" to="/register">
+                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                             Register
-                        </Offcanvas.Title>
+                            </Offcanvas.Title>
+                        </LinkContainer>
 
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
