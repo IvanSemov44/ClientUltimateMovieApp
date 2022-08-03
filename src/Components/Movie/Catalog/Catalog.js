@@ -13,7 +13,7 @@ const Catalog = () => {
     let page;
 
     if (param) {
-        page = 1;
+        page =1;
     }
 
     useEffect(() => {

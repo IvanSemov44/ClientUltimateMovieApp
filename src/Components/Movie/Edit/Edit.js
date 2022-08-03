@@ -1,14 +1,20 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
 import * as MovieService from '../../../service/MovieService';
 import "../Create/Create.css";
 
 function Edit() {
+    const {user} = useContext(AuthContext);
     const navigate = useNavigate();
     const [movie, setMovie] = useState({});
     const { movieId } = useParams();
@@ -84,10 +90,10 @@ function Edit() {
 
                 })}
             onSubmit={(values, { setSubmiting }) => {
-                MovieService.createMovie(values)
+                MovieService.updateMovie({ ...values, id: movieId },user.token)
                     .then(response => {
                         console.log(response)
-                        navigate(`/view/${response.id}`, { replace: false })
+                        navigate(`/view/${movieId}`, { replace: true })
                     });
                 setSubmiting(false);
             }}

@@ -1,49 +1,52 @@
 
 const url = "http://localhost:5162/api/movie/";
 
+
 const header = { 'Content-Type': 'application/json' };
 //const pagination = "?pageNumber2&pageSize=5"
 
 export const getMoviesByPageHeader = (page) => {
     return (
-        fetch(url + `?pageNumber=${page}&pageSize=5`)
+        fetch(url + `?pageNumber=${page}&pageSize=8`)
             .then(response => response.headers.get('x-pagination'))
     )
 }
 export const getMoviesByPageBody = (page) => {
     return (
-        fetch(url + `?pageNumber=${page}&pageSize=5`)
+        fetch(url + `?pageNumber=${page}&pageSize=8`)
             .then(response => response.json())
     )
 }
 
 export const getMovie = (id) => {
     return (
-        fetch(url + id, {
-            headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiR29zaG9Hb3Nob3YiLCJleHAiOjE2NjIxNzg5MDcsImlzcyI6IlVsdGltYXRlTW92aWVBcHAiLCJhdWQiOiJIdHRwOi8vbG9jYWxob3N0OjUxNjIifQ.JIlCbQyljEiHtS84BxFFhzUz0xsicJ3lEvVrjZoz6bs",
-            }
-        })
+        fetch(url + id)
             .then(response => response.json())
     )
 }
 
-export const createMovie = (data) => {
+export const createMovie = (data,token) => {
     return (
         fetch(url, {
             method: "POST",
-            headers: header,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+ token 
+            },
             body: JSON.stringify(data)
         })
             .then(response => response.json())
     )
 }
 
-export const updateMovie = (id, data) => {
+export const updateMovie = (data,token) => {
     return (
-        fetch(url + id, {
+        fetch(url + data.id, {
             method: "PUT",
-            headers: header,
+            headers: {
+                'Content-Type': 'application/json',
+                 'Authorization': 'Bearer '+ token 
+            },
             body: JSON.stringify(data)
         })
             .then(response => {

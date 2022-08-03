@@ -1,13 +1,20 @@
 import React from "react";
+import { useContext } from "react";
+
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
 import * as MovieService from '../../../service/MovieService';
+
 import "../Create/Create.css";
 
 function Create() {
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -75,10 +82,10 @@ function Create() {
 
                 })}
             onSubmit={(values, { setSubmiting }) => {
-                MovieService.createMovie(values)
+                MovieService.createMovie({ ...values, MovieOwnerId: user.id }, user.token)
                     .then(response => {
                         console.log(response)
-                        navigate(`/view/${response.id}`, { replace: false })
+                        navigate(`/view/${response}`, { replace: false })
                     });
                 setSubmiting(false);
             }}

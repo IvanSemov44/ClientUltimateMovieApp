@@ -1,14 +1,20 @@
 import React from 'react';
+import { useContext } from 'react';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+
 import {useNavigate} from "react-router-dom";
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { AuthContext } from '../../../context/AuthContext/AuthContext';
 import * as UserService from '../../../service/UserService';
 
 const Register = () => {
     const navigation = useNavigate  ();
+    const {login} = useContext(AuthContext);
 
     return (
             <Formik
@@ -28,7 +34,8 @@ const Register = () => {
 
                     })}
                 onSubmit={(values, { setSubmiting }) => {
-                    console.log(UserService.login(values).then(result=>result));
+                    UserService.login(values).then(result => login(result));
+
                     navigation("/",{replace:true})
                 }}
             >
