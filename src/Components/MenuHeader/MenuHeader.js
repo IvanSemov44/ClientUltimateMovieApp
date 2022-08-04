@@ -14,7 +14,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 
-const MenuHeader=()=> {
+const MenuHeader = () => {
     const { user } = useContext(AuthContext);
 
     return (
@@ -32,7 +32,7 @@ const MenuHeader=()=> {
                             </Offcanvas.Title>
                         </LinkContainer>
 
-                        {user.username ===''
+                        {user.username === ''
                             ?
                             <>
                                 <LinkContainer LinkContainer type="button" to="/login" >
@@ -68,9 +68,11 @@ const MenuHeader=()=> {
                                                 </Offcanvas.Title>
                                             </LinkContainer>
 
-                                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                                My Movie
-                                            </Offcanvas.Title>
+                                            <LinkContainer type="button" to="/MyCatalog">
+                                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                                    My Movie
+                                                </Offcanvas.Title>
+                                            </LinkContainer>
 
                                             <NavDropdown
                                                 title="Dropdown"

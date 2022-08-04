@@ -34,6 +34,7 @@ function View() {
         navigate('/', { replace: true });
     }
 
+    console.log(user.id,movie.movieOwnerId);
     return (
         <div className="div-viewItem">
             <Card bg="dark" text="white" className="card-view" style={{ width: '45rem' }}>
@@ -74,7 +75,7 @@ function View() {
 
                 <Card.Subtitle className="card-view-subtitle">Imgd: No suport for now</Card.Subtitle>
 
-                {user.username !==''
+                {user.id === movie.movieOwnerId
                     ?
                     <>
                         <LinkContainer to={"/Edit/" + movie.id}>

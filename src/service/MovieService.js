@@ -18,6 +18,17 @@ export const getMoviesByPageBody = (page) => {
     )
 }
 
+export const getMoviesByMovieOwner = (token) => {
+  return(  fetch(url+"movies", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
+        .then(response => response.json())
+)}
+
 export const getMovie = (id) => {
     return (
         fetch(url + id)
@@ -25,27 +36,27 @@ export const getMovie = (id) => {
     )
 }
 
-export const createMovie = (data,token) => {
+export const createMovie = (data, token) => {
     return (
         fetch(url, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+ token 
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(data)
         })
-            .then(response => response.json())
+            .then(response =>response.json())
     )
 }
 
-export const updateMovie = (data,token) => {
+export const updateMovie = (data, token) => {
     return (
         fetch(url + data.id, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
-                 'Authorization': 'Bearer '+ token 
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(data)
         })
