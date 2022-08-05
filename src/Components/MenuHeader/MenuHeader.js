@@ -46,6 +46,7 @@ const MenuHeader = () => {
                                         Register
                                     </Offcanvas.Title>
                                 </LinkContainer>
+                                
                             </>
                             :
                             <>
@@ -97,6 +98,14 @@ const MenuHeader = () => {
                                             />
                                             <Button variant="outline-success">Search</Button>
                                         </Form>
+
+                                        <LinkContainer type="button" to="/Logout">
+                                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                                Logout
+                                            </Offcanvas.Title>
+                                        </LinkContainer>
+
+                                        
                                     </Offcanvas.Body>
                                 </Navbar.Offcanvas>
                             </>
