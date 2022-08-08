@@ -1,10 +1,11 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext} from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -13,34 +14,37 @@ import { AuthContext } from '../../../context/AuthContext/AuthContext';
 import * as UserService from '../../../service/UserService';
 
 const Register = () => {
-    const navigation = useNavigate  ();
-    const {login} = useContext(AuthContext);
+    const navigation = useNavigate();
+    const { login } = useContext(AuthContext);
+    // const [show,setShow] = setShow(true);
 
     return (
-            <Formik
-                initialValues={{
-                    username: '',
-                    password: ''
-                }}
-                validationSchema={
-                    Yup.object({
-                        username: Yup.string()
-                            .max(15, 'Must be 15 character or less')
-                            .min(3, 'Must be 3 character or more')
-                            .required('Required'),
-                        password: Yup.string()
-                            .min(6, "Required")
-                            .required("Required"),
+        <Formik
+            initialValues={{
+                username: '',
+                password: ''
+            }}
+            validationSchema={
+                Yup.object({
+                    username: Yup.string()
+                        .max(15, 'Must be 15 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    password: Yup.string()
+                        .min(6, "Required")
+                        .required("Required"),
 
-                    })}
-                onSubmit={(values, { setSubmiting }) => {
-                    UserService.login(values).then(result => login(result));
+                })}
+            onSubmit={(values, { setSubmiting }) => {
+                UserService.login(values).then(result => login(result));
 
-                    navigation("/",{replace:true})
-                }}
-            >
-                {formik => (
-                    <>
+                navigation("/", { replace: true })
+            }}
+        >
+            {formik => (
+                <>
+                    <Modal show={true}>
+                        <Modal.Body>
                         <Form onSubmit={formik.handleSubmit}>
 
                             <Form.Group className="position-relative">
@@ -73,11 +77,13 @@ const Register = () => {
 
                             </Form.Group>
 
-                            <Button type="submit">Submit form</Button>
+                            <Button type="submit">Login</Button>
                         </Form>
-                    </>
-                )}
-            </Formik >
+                        </Modal.Body>
+                    </Modal>
+                </>
+            )}
+        </Formik >
     );
 }
 

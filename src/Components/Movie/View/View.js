@@ -9,7 +9,10 @@ import Button from 'react-bootstrap/esm/Button';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import { AuthContext } from '../../../context/AuthContext/AuthContext';
+
+import ConfirmDialog from '../../Common/ConfirmDialog/ConfirmDialog';
 import * as movieService from '../../../service/MovieService';
+
 import './View.css';
 
 const deaultMovieImg = "https://media.comicbook.com/files/img/default-movie.png";
@@ -22,6 +25,7 @@ function View() {
     const navigate = useNavigate();
     const { movieId } = useParams();
     const [movie, setMovie] = useState({});
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
     useEffect(() => {
         movieService.getMovie(movieId)
@@ -34,67 +38,78 @@ function View() {
         navigate('/', { replace: true });
     }
 
-    console.log(user.id,movie.movieOwnerId);
+    const deleteClickHandler = (e) => {
+        e.preventDefault();
+
+        setShowDeleteDialog(true);
+    }
+
     return (
-        <div className="div-viewItem">
-            <Card bg="dark" text="white" className="card-view" style={{ width: '45rem' }}>
-                <Card.Header className="card-view-header" size="xxl">{movie.title} ({movie.year})</Card.Header>
+        <>
+            <ConfirmDialog show={showDeleteDialog} onClose={()=>{setShowDeleteDialog(false)}} />
+            <div className="div-viewItem">
+                <Card bg="dark" text="white" className="card-view" style={{ width: '45rem' }}>
+                    <Card.Header className="card-view-header" size="xxl">{movie.title} ({movie.year})</Card.Header>
 
-                {
-                    movie.imageUrl !== ""
-                        ? <Card.Img src={movie.imageUrl} alt="Movie Picter" className='imgView' />
-                        : <Card.Img src={deaultMovieImg} alt="Movie Picter" className='imgView' />
-                }
+                    {
+                        movie.imageUrl !== ""
+                            ? <Card.Img src={movie.imageUrl} alt="Movie Picter" className='imgView' />
+                            : <Card.Img src={deaultMovieImg} alt="Movie Picter" className='imgView' />
+                    }
 
-                <Card.Subtitle className="card-view-subtitle" bsPrefix>Dicrector: {movie.creator}</Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle" bsPrefix>Dicrector: {movie.creator}</Card.Subtitle>
 
-                <Card.Subtitle className="card-view-subtitle">actiors:{movie.actors}</Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle">actiors:{movie.actors}</Card.Subtitle>
 
-                <Card.Subtitle className="card-view-subtitle">Country:{movie.country}</Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle">Country:{movie.country}</Card.Subtitle>
 
-                <Card.Subtitle className="card-view-subtitle">Description:{movie.descriptions}</Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle">Description:{movie.descriptions}</Card.Subtitle>
 
-                {
-                    movie.trailerUrl !== ""
-                        ? < Card.Subtitle className="card-view-subtitle">Trailer</Card.Subtitle>
-                        : ""
-                }
-                {
-                    movie.imageUrl !== ""
-                        ? <Card.Img src={movie.imageUrl} alt="Movie Picter" className='imgView' />
-                        : <Card.Img src={deaultMovieImg} alt="Movie Picter" className='imgView' />
-                }
+                    {
+                        movie.trailerUrl !== ""
+                            ? < Card.Subtitle className="card-view-subtitle">Trailer</Card.Subtitle>
+                            : ""
+                    }
+                    {
+                        movie.imageUrl !== ""
+                            ? <Card.Img src={movie.imageUrl} alt="Movie Picter" className='imgView' />
+                            : <Card.Img src={deaultMovieImg} alt="Movie Picter" className='imgView' />
+                    }
 
-                <Card.Subtitle className="card-view-subtitle">Category: {movie.category}</Card.Subtitle>
+                    <iframe width="1124" height="480" src="https://www.youtube.com/embed/4YVI2JRhXU8" title="Avicii, Calvin Harris, Kygo, Alok, Robin Schulz, David Guetta, Gryffin - Summer Vibes Mix #138" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-                <Card.Subtitle className="card-view-subtitle">Long: No suport for now </Card.Subtitle>
 
-                <Card.Subtitle className="card-view-subtitle">Downloands: No suport for now</Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle">Category: {movie.category}</Card.Subtitle>
 
-                <Card.Subtitle className="card-view-subtitle">Size: No suport for now </Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle">Long: No suport for now </Card.Subtitle>
 
-                <Card.Subtitle className="card-view-subtitle">Imgd: No suport for now</Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle">Downloands: No suport for now</Card.Subtitle>
 
-                {user.id === movie.movieOwnerId
-                    ?
-                    <>
-                        <LinkContainer to={"/Edit/" + movie.id}>
-                            <Button variant="outline-light">Edit</Button>
-                        </LinkContainer>
-                        <LinkContainer to="/">
-                            <Button onClick={OnDelete} variant="outline-light">Delete</Button>
-                        </LinkContainer>
+                    <Card.Subtitle className="card-view-subtitle">Size: No suport for now </Card.Subtitle>
 
-                        <Button variant="outline-light">Download</Button>
-                        <Button variant="outline-light">Subtitle</Button>
+                    <Card.Subtitle className="card-view-subtitle">Imgd: No suport for now</Card.Subtitle>
 
-                        <Button variant="outline-light">Comment</Button>
-                        <Button variant="outline-light">Like</Button>
-                    </>
-                    : <></>
-                }
-            </Card>
-        </div>
+                    {user.id === movie.movieOwnerId
+                        ?
+                        <>
+                            <LinkContainer to={"/Edit/" + movie.id}>
+                                <Button variant="outline-light">Edit</Button>
+                            </LinkContainer>
+                            <LinkContainer to="/">
+                                <Button onClick={OnDelete} variant="outline-light">Delete</Button>
+                            </LinkContainer>
+
+                            <Button variant="outline-light" onClick={deleteClickHandler}>Download</Button>
+                            <Button variant="outline-light">Subtitle</Button>
+
+                            <Button variant="outline-light">Comment</Button>
+                            <Button variant="outline-light">Like</Button>
+                        </>
+                        : <></>
+                    }
+                </Card>
+            </div>
+        </>
     )
 }
 
