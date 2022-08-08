@@ -39,14 +39,13 @@ function View() {
     }
 
     const deleteClickHandler = (e) => {
-        e.preventDefault();
-
+        e.preventDefault()
         setShowDeleteDialog(true);
     }
 
     return (
         <>
-            <ConfirmDialog show={showDeleteDialog} onClose={()=>{setShowDeleteDialog(false)}} />
+            <ConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} saveChanges={OnDelete}/>
             <div className="div-viewItem">
                 <Card bg="dark" text="white" className="card-view" style={{ width: '45rem' }}>
                     <Card.Header className="card-view-header" size="xxl">{movie.title} ({movie.year})</Card.Header>
@@ -96,10 +95,10 @@ function View() {
                                 <Button variant="outline-light">Edit</Button>
                             </LinkContainer>
                             <LinkContainer to="/">
-                                <Button onClick={OnDelete} variant="outline-light">Delete</Button>
+                                <Button onClick={deleteClickHandler} variant="outline-light">Delete</Button>
                             </LinkContainer>
 
-                            <Button variant="outline-light" onClick={deleteClickHandler}>Download</Button>
+                            <Button variant="outline-light" >Download</Button>
                             <Button variant="outline-light">Subtitle</Button>
 
                             <Button variant="outline-light">Comment</Button>

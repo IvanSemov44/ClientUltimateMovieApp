@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -13,12 +13,26 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 
+import Login from '../User/Login/Login';
+import Register from "../User/Register/Register";
+
 
 const MenuHeader = () => {
     const { user } = useContext(AuthContext);
+    const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
+
+    const loginHandler = () => {
+        setShowLogin(true)
+    }
+    const registerHandler = () => {
+        setShowRegister(true);
+    }
 
     return (
         <>
+            <Login show={showLogin} close={() => setShowLogin(false)} />
+            <Register show={showRegister} close={() => setShowRegister(false)} />
             {['xxl'].map((expand) => (
                 <Navbar key={expand} bg="light" expand={expand} className="mb-3">
                     <Container fluid>
@@ -35,18 +49,19 @@ const MenuHeader = () => {
                         {user.username === ''
                             ?
                             <>
-                                <LinkContainer LinkContainer type="button" to="/login" >
-                                    <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                        Login
-                                    </Offcanvas.Title>
-                                </LinkContainer >
 
-                                <LinkContainer type="button" to="/register">
-                                    <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                    <Button type="button" onClick={loginHandler} >
+                                        Login
+                                    </Button>
+                                </Offcanvas.Title>
+
+                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                    <Button type="button" onClick={registerHandler}>
                                         Register
-                                    </Offcanvas.Title>
-                                </LinkContainer>
-                                
+                                    </Button>
+                                </Offcanvas.Title>
+
                             </>
                             :
                             <>
@@ -105,7 +120,7 @@ const MenuHeader = () => {
                                             </Offcanvas.Title>
                                         </LinkContainer>
 
-                                        
+
                                     </Offcanvas.Body>
                                 </Navbar.Offcanvas>
                             </>

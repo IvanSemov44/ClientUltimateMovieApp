@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext} from 'react';
+import { useContext } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -13,10 +13,12 @@ import * as Yup from 'yup';
 import { AuthContext } from '../../../context/AuthContext/AuthContext';
 import * as UserService from '../../../service/UserService';
 
-const Register = () => {
+const Login = ({
+    show,
+    close
+}) => {
     const navigation = useNavigate();
     const { login } = useContext(AuthContext);
-    // const [show,setShow] = setShow(true);
 
     return (
         <Formik
@@ -24,6 +26,7 @@ const Register = () => {
                 username: '',
                 password: ''
             }}
+
             validationSchema={
                 Yup.object({
                     username: Yup.string()
@@ -35,50 +38,52 @@ const Register = () => {
                         .required("Required"),
 
                 })}
-            onSubmit={(values, { setSubmiting }) => {
-                UserService.login(values).then(result => login(result));
 
-                navigation("/", { replace: true })
+            onSubmit={(values, { resetForm }) => {
+                UserService.login(values).then(result => login(result));
+                close();
+                resetForm();
+                navigation("/", { replace: true });
             }}
         >
             {formik => (
                 <>
-                    <Modal show={true}>
+                    <Modal show={show} onHide={close} >
                         <Modal.Body>
-                        <Form onSubmit={formik.handleSubmit}>
+                            <Form onSubmit={formik.handleSubmit}>
 
-                            <Form.Group className="position-relative">
-                                <Form.Label htmlFor="username">Username</Form.Label>
-                                <Form.Control
-                                    id="username"
-                                    type="text"
-                                    name="username"
-                                    {...formik.getFieldProps('username')}
-                                    isInvalid={formik.touched.username && formik.errors.username}
-                                    isValid={formik.touched.username && !formik.errors.username}
-                                />
-                                <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
-                                <Form.Control.Feedback type="invalid" tooltip>{formik.errors.username}</Form.Control.Feedback>
+                                <Form.Group className="position-relative">
+                                    <Form.Label htmlFor="username">Username</Form.Label>
+                                    <Form.Control
+                                        id="username"
+                                        type="text"
+                                        name="username"
+                                        {...formik.getFieldProps('username')}
+                                        isInvalid={formik.touched.username && formik.errors.username}
+                                        isValid={formik.touched.username && !formik.errors.username}
+                                    />
+                                    <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>{formik.errors.username}</Form.Control.Feedback>
 
-                            </Form.Group>
+                                </Form.Group>
 
-                            <Form.Group className="position-relative">
-                                <Form.Label htmlFor="password">Password</Form.Label>
-                                <Form.Control
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    {...formik.getFieldProps('password')}
-                                    isInvalid={formik.touched.password && formik.errors.password}
-                                    isValid={formik.touched.password && !formik.errors.password}
-                                />
-                                <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
-                                <Form.Control.Feedback type="invalid" tooltip>{formik.errors.password}</Form.Control.Feedback>
+                                <Form.Group className="position-relative">
+                                    <Form.Label htmlFor="password">Password</Form.Label>
+                                    <Form.Control
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        {...formik.getFieldProps('password')}
+                                        isInvalid={formik.touched.password && formik.errors.password}
+                                        isValid={formik.touched.password && !formik.errors.password}
+                                    />
+                                    <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>{formik.errors.password}</Form.Control.Feedback>
 
-                            </Form.Group>
+                                </Form.Group>
 
-                            <Button type="submit">Login</Button>
-                        </Form>
+                                <Button type="submit">Login</Button>
+                            </Form>
                         </Modal.Body>
                     </Modal>
                 </>
@@ -87,4 +92,4 @@ const Register = () => {
     );
 }
 
-export default Register;
+export default Login;

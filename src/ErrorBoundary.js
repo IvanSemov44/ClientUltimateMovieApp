@@ -1,26 +1,26 @@
+import React from "react";
 import { Component } from "react";
 
-export default class ErrorBoundary extends Component{
-    constructor(props){
+export default class ErrorBoundary extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
-            error:null
+            error: null
         }
     }
 
-    static getDerivedStateFromError(error){
-        console.log('getDerivedStateFromError');
-        return {error};
+    static getDerivedStateFromError(error) {
+        return { error };
     }
 
-    componentDidCatch(error){
+    componentDidCatch(error) {
         console.log(error);
     }
 
-    render(){
+    render() {
         return this.state.error
-        ? <h1>404</h1>
-        : this.props.childern;
+            ? <h1>404</h1>
+            : this.props.childern;
     }
 }
