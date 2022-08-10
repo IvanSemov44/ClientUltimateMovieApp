@@ -1,32 +1,38 @@
-const url ="http://localhost:5162/api/authentication/";
+const url = "http://localhost:5162/api/authentication/";
 const header = { 'Content-Type': 'application/json' };
 
 
 
-export const register=(data)=>
-{
-    const sentData ={
+export async function register(data) {
+    const sentData = {
         ...data,
-        roles:["User"]
+        roles: ["User"]
     }
-    return(
-        fetch(url+"register",{
-            method:"POST",
-            headers:header,
-            body: JSON.stringify(sentData)
-        })
-        .then(response=>console.log(response.status))
-    )
+    const response = await fetch(url + "register", {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify(sentData)
+    });
+
+
+    if (response.ok === true) {
+        return response
+    } else {
+        throw await response.json();
+    }
 }
 
-export const login = (data) =>{
+export async function login(data) {
 
-    return (
-        fetch(url+"login",{
-            method:"POST",
-            headers:header,
-            body:  JSON.stringify(data)
-        })
-        .then(response=>response.json())
-    );
+    const response = await fetch(url + "login", {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify(data)
+    });
+    if (response.ok === true) {
+        return response;
+    } else {
+        throw await response.json();
+    }
+
 }

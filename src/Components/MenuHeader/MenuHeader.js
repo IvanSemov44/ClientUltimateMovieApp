@@ -11,7 +11,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 import { LinkContainer } from "react-router-bootstrap";
 
-import { AuthContext } from '../../context/AuthContext/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 import Login from '../User/Login/Login';
 import Register from "../User/Register/Register";

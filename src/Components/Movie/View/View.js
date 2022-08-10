@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/esm/Button';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
-import { AuthContext } from '../../../context/AuthContext/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 
 import ConfirmDialog from '../../Common/ConfirmDialog/ConfirmDialog';
 import * as movieService from '../../../service/MovieService';

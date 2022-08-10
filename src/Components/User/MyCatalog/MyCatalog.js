@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from "react";
 
 
 import * as movieService from "../../../service/MovieService";
-import { AuthContext } from "../../../context/AuthContext/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 import CardCom from "../../Movie/Card/Card";
 import "../../Movie/Catalog/Catalog.css";
 

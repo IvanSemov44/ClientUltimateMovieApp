@@ -1,16 +1,17 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Toast from 'react-bootstrap/Toast';
 
 import { useNavigate } from "react-router-dom";
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { AuthContext } from '../../../context/AuthContext/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 import * as UserService from '../../../service/UserService';
 
 const Login = ({
@@ -19,6 +20,8 @@ const Login = ({
 }) => {
     const navigation = useNavigate();
     const { login } = useContext(AuthContext);
+    const [showToggle, setShowToggle] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     return (
         <Formik
@@ -40,16 +43,33 @@ const Login = ({
                 })}
 
             onSubmit={(values, { resetForm }) => {
-                UserService.login(values).then(result => login(result));
-                close();
-                resetForm();
-                navigation("/", { replace: true });
+                UserService.login(values)
+                    .then(
+                        result => {
+                            login(result)
+                            close();
+                            resetForm();
+                            navigation("/", { replace: true });
+                        }
+                    )
+                    .catch(
+                        result => {
+                            setShowToggle(true);
+                            console.log(result);
+                            setErrorMessage(result.error);
+                        }
+                    );
             }}
         >
             {formik => (
                 <>
-                    <Modal show={show} onHide={close} >
+                    <Modal show={show} onHide={close}>
                         <Modal.Body>
+                            <Toast show={showToggle} onClose={() => setShowToggle(false)} bg='danger' >
+                                <Toast.Body className={ 'Danger'}>
+                                    {errorMessage}
+                                </Toast.Body>
+                            </Toast>
                             <Form onSubmit={formik.handleSubmit}>
 
                                 <Form.Group className="position-relative">

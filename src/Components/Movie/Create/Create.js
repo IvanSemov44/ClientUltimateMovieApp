@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { AuthContext } from "../../../context/AuthContext/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 import * as MovieService from '../../../service/MovieService';
 
 import "../Create/Create.css";

@@ -1,8 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Toast from 'react-bootstrap/Toast';
 
 import { useNavigate } from "react-router-dom";
 import { Formik } from 'formik';
@@ -15,55 +17,89 @@ const Register = ({
     close
 }) => {
     const navigation = useNavigate();
+    const [showToggle, setShowToggle] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState([]);
+
+
+
+
+    const ErrorMessagesToast = (
+        <Toast show={showToggle} onClose={() => setShowToggle(false)} bg='danger' >
+            <Toast.Body className={'Danger'}>
+                {errorMessage}
+            </Toast.Body>
+        </Toast>
+    )
 
     return (
-        <Modal show={show} onHide={close}>
-            <Modal.Body>
-                <Formik
-                    initialValues={{
-                        firstName: '',
-                        lastName: '',
-                        username: '',
-                        email: '',
-                        password: '',
-                        repeatPassword: ''
-                    }}
-                    validationSchema={
-                        Yup.object({
-                            firstName: Yup.string()
-                                .max(15, 'Must be 15 character or less')
-                                .min(3, 'Must be 3 character or more')
-                                .required('Required'),
-                            lastName: Yup.string()
-                                .max(15, 'Must be 15 character or less')
-                                .min(3, 'Must be 3 character or more')
-                                .required('Required'),
-                            username: Yup.string()
-                                .max(15, 'Must be 15 character or less')
-                                .min(3, 'Must be 3 character or more')
-                                .required('Required'),
-                            email: Yup.string()
-                                .email('Invalid email address')
-                                .required('Required'),
-                            password: Yup.string()
-                                .min(6, "Required")
-                                .required("Required"),
-                            repeatPassword: Yup.string()
-                                .required("Please confirm your password")
-                                .oneOf([Yup.ref("password")], "Passwords do not match"),
+        <Formik
+            initialValues={{
+                firstName: '',
+                lastName: '',
+                username: '',
+                email: '',
+                password: '',
+                repeatPassword: ''
+            }}
+            validationSchema={
+                Yup.object({
+                    firstName: Yup.string()
+                        .max(15, 'Must be 15 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    lastName: Yup.string()
+                        .max(15, 'Must be 15 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    username: Yup.string()
+                        .max(15, 'Must be 15 character or less')
+                        .min(3, 'Must be 3 character or more')
+                        .required('Required'),
+                    email: Yup.string()
+                        .email('Invalid email address')
+                        .required('Required'),
+                    password: Yup.string()
+                        .min(6, "Required")
+                        .required("Required"),
+                    repeatPassword: Yup.string()
+                        .required("Please confirm your password")
+                        .oneOf([Yup.ref("password")], "Passwords do not match"),
 
-                        })}
-                    onSubmit={(values, { resetForm }) => {
-                        console.log(UserService.register(values));
+                })}
+            onSubmit={(values, { resetForm }) => {
+                UserService.register(values)
+                    .then(result => {
                         close();
                         resetForm();
                         navigation("/", { replace: true })
-                    }}
-                >
-                    {formik => (
-                        <>
-                            <Form onSubmit={formik.handleSubmit}>
+                    })
+                    .catch(
+                        result => {
+                            setShowToggle(true);
+                            console.log(Object.values(result));
+                            setErrors(Object.values(result))
+                            setErrorMessage(result);
+                        })
 
+            }}
+        >
+            {formik => (
+                <>
+                    <Modal show={show} onHide={close}>
+                        <Modal.Body>
+
+                            {
+                                errors.map(x =>
+                                    <Toast key={x} show={showToggle} onClose={() => setShowToggle(false)} bg='danger' >
+                                        <Toast.Body className='Danger'>
+                                            {x}
+                                        </Toast.Body>
+                                    </Toast>
+                                )
+                            }
+
+                            <Form onSubmit={formik.handleSubmit}>
                                 <Form.Group className="position-relative">
                                     <Form.Label htmlFor="firstName">First Name</Form.Label>
                                     <Form.Control
@@ -154,11 +190,12 @@ const Register = ({
 
                                 <Button type="submit">Register</Button>
                             </Form>
-                        </>
-                    )}
-                </Formik >
-            </Modal.Body>
-        </Modal>
+
+                        </Modal.Body>
+                    </Modal>
+                </>
+            )}
+        </Formik >
     );
 }
 
