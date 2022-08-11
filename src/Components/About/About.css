@@ -1,0 +1,25 @@
+.flex-about {
+    display: flex;
+    justify-content: space-around;
+    background-color: #212529;
+    text-align: center;
+}
+
+.about-desc {
+    width: 40%;
+}
+
+.about-fb {
+    color: white;
+    font-size: 30px
+}
+
+.fontIcon {
+    padding-inline: 40%;
+}
+
+.about-copy {
+    color: white;
+    font-size: 20px;
+    padding-bottom: 30px;
+}

@@ -1,0 +1,22 @@
+.menuHeader-login-register{
+    display:flex;
+    gap:20px;
+}
+
+.offcanvas.offcanvas-end.show{
+    background-color: #212529;
+    color:#fff;
+}
+.offcanvas-toggling{
+    background-color: #212529;
+}
+
+.offcanvas-border-button{
+    font-size: 20px;
+    padding: 10px 10px;
+    margin-inline-end:-5px;
+    margin-block: 30px;
+    border-color: rgb(51, 49, 49);
+    border-bottom-style:solid;
+    
+}

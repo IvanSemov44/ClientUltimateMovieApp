@@ -75,7 +75,7 @@ function View() {
                             : <Card.Img src={deaultMovieImg} alt="Movie Picter" className='imgView' />
                     }
 
-                    <iframe width="1124" height="480" src="https://www.youtube.com/embed/4YVI2JRhXU8" title="Avicii, Calvin Harris, Kygo, Alok, Robin Schulz, David Guetta, Gryffin - Summer Vibes Mix #138" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="100%" height="480" src="https://www.youtube.com/embed/4YVI2JRhXU8" title="Avicii, Calvin Harris, Kygo, Alok, Robin Schulz, David Guetta, Gryffin - Summer Vibes Mix #138" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
                     <Card.Subtitle className="card-view-subtitle">Category: {movie.category}</Card.Subtitle>

@@ -18,19 +18,7 @@ const Register = ({
 }) => {
     const navigation = useNavigate();
     const [showToggle, setShowToggle] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
     const [errors, setErrors] = useState([]);
-
-
-
-
-    const ErrorMessagesToast = (
-        <Toast show={showToggle} onClose={() => setShowToggle(false)} bg='danger' >
-            <Toast.Body className={'Danger'}>
-                {errorMessage}
-            </Toast.Body>
-        </Toast>
-    )
 
     return (
         <Formik
@@ -78,8 +66,7 @@ const Register = ({
                         result => {
                             setShowToggle(true);
                             console.log(Object.values(result));
-                            setErrors(Object.values(result))
-                            setErrorMessage(result);
+                            setErrors(Object.values(result));
                         })
 
             }}

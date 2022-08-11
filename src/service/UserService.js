@@ -30,7 +30,7 @@ export async function login(data) {
         body: JSON.stringify(data)
     });
     if (response.ok === true) {
-        return response;
+        return await response.json();
     } else {
         throw await response.json();
     }

@@ -3,22 +3,27 @@ import { useContext, useState } from "react";
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilm } from '@fortawesome/free-solid-svg-icons'
 
 import { LinkContainer } from "react-router-bootstrap";
 
 import { AuthContext } from '../../context/AuthContext';
+import { OffcanvasContext } from "../../context/OffcanvasContext";
 
 import Login from '../User/Login/Login';
 import Register from "../User/Register/Register";
 
+import "../MenuHeader/MenuHeader.css";
+
 
 const MenuHeader = () => {
     const { user } = useContext(AuthContext);
+    const { showOffcanvas, setShowOffcanvas } = useContext(OffcanvasContext);
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
 
@@ -33,101 +38,81 @@ const MenuHeader = () => {
         <>
             <Login show={showLogin} close={() => setShowLogin(false)} />
             <Register show={showRegister} close={() => setShowRegister(false)} />
-            {['xxl'].map((expand) => (
-                <Navbar key={expand} bg="light" expand={expand} className="mb-3">
-                    <Container fluid>
-                        <LinkContainer type="button" to="/">
-                            <Navbar.Brand>Navbar Offcanvas</Navbar.Brand>
-                        </LinkContainer>
 
+            <Navbar key="xxl" bg="dark" variant="dark" expand="xxl" className="mb-3">
+                <Container fluid>
+
+                    <LinkContainer type="button" to="/">
+                        <Navbar.Brand>
+                            <FontAwesomeIcon icon={faFilm} />{'  '}
+                            Ultimate Movie
+                        </Navbar.Brand>
+                    </LinkContainer>
+                    <Nav className="me-auto">
                         <LinkContainer type="button" to="/Catalog">
-                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                            <Nav.Link>
                                 Catalog
-                            </Offcanvas.Title>
+                            </Nav.Link>
                         </LinkContainer>
-
-                        {user.username === ''
-                            ?
-                            <>
-
-                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                    <Button type="button" onClick={loginHandler} >
+                    </Nav>
+                    {user.username === ''
+                        ?
+                        <>
+                            <div className="menuHeader-login-register">
+                                <Offcanvas.Title id="offcanvasNavbarLabel-expand-xxl">
+                                    <Button type="button" variant="outline-primary" onClick={loginHandler} >
                                         Login
                                     </Button>
                                 </Offcanvas.Title>
 
-                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                    <Button type="button" onClick={registerHandler}>
+                                <Offcanvas.Title id="offcanvasNavbarLabel-expand-xxl">
+                                    <Button type="button" variant="outline-primary" onClick={registerHandler}>
                                         Register
                                     </Button>
                                 </Offcanvas.Title>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <Navbar.Toggle onClick={() => setShowOffcanvas(true)} aria-controls="offcanvasNavbarLabel-expand-xxl" />
+                            <Navbar.Offcanvas show={showOffcanvas} onHide={() => setShowOffcanvas(false)}
+                                scroll="true"
+                                id="offcanvasNavbarLabel-expand-xxl"
+                                aria-labelledby="offcanvasNavbarLabel-expand-xxl"
+                                placement="end"
+                            >
+                                <Offcanvas.Header closeButton>
+                                    <Offcanvas.Title id="offcanvasNavbarLabel-expand-xxl">
+                                        {user.username}
+                                    </Offcanvas.Title>
+                                </Offcanvas.Header>
+                                <Offcanvas.Body>
+                                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                                        <LinkContainer type="button" onClick={() => setShowOffcanvas(false)} to="/Create">
+                                            <Offcanvas.Title class="offcanvas-border-button" id="offcanvasNavbarLabel-expand-xxl">
+                                                Create
+                                            </Offcanvas.Title>
+                                        </LinkContainer>
 
-                            </>
-                            :
-                            <>
-                                <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-                                <Navbar.Offcanvas
-                                    id={`offcanvasNavbar-expand-${expand}`}
-                                    aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                                    placement="end"
-                                >
-                                    <Offcanvas.Header closeButton>
-                                        <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                            {user.username}
-                                        </Offcanvas.Title>
-                                    </Offcanvas.Header>
-                                    <Offcanvas.Body>
-                                        <Nav className="justify-content-end flex-grow-1 pe-3">
-                                            <LinkContainer type="button" to="/Create">
-                                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                                    Create
-                                                </Offcanvas.Title>
-                                            </LinkContainer>
-
-                                            <LinkContainer type="button" to="/MyCatalog">
-                                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                                    My Movie
-                                                </Offcanvas.Title>
-                                            </LinkContainer>
-
-                                            <NavDropdown
-                                                title="Dropdown"
-                                                id={`offcanvasNavbarDropdown-expand-${expand}`}
-                                            >
-                                                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                                <NavDropdown.Item href="#action4">
-                                                    Another action
-                                                </NavDropdown.Item>
-                                                <NavDropdown.Divider />
-                                                <NavDropdown.Item href="#action5">
-                                                    Something else here
-                                                </NavDropdown.Item>
-                                            </NavDropdown>
-                                        </Nav>
-                                        <Form className="d-flex">
-                                            <Form.Control
-                                                type="search"
-                                                placeholder="Search"
-                                                className="me-2"
-                                                aria-label="Search"
-                                            />
-                                            <Button variant="outline-success">Search</Button>
-                                        </Form>
-
-                                        <LinkContainer type="button" to="/Logout">
-                                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                                Logout
+                                        <LinkContainer type="button" onClick={() => setShowOffcanvas(false)} to="/MyCatalog">
+                                            <Offcanvas.Title class="offcanvas-border-button" id="offcanvasNavbarLabel-expand-xxl">
+                                                My Movie
                                             </Offcanvas.Title>
                                         </LinkContainer>
 
 
-                                    </Offcanvas.Body>
-                                </Navbar.Offcanvas>
-                            </>
-                        }
-                    </Container>
-                </Navbar>
-            ))}
+                                        <LinkContainer type="button" to="/Logout">
+                                            <Offcanvas.Title class="offcanvas-border-button" id="offcanvasNavbarLabel-expand-xxl">
+                                                Logout
+                                            </Offcanvas.Title>
+                                        </LinkContainer>
+                                    </Nav>
+                                </Offcanvas.Body>
+                            </Navbar.Offcanvas>
+                        </>
+                    }
+                </Container>
+            </Navbar>
         </>
     );
 }
