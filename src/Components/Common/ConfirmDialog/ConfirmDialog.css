@@ -1,0 +1,6 @@
+.view-btn {
+    margin: 30px;
+    display: flex;
+    gap: 20px;
+    padding-inline: 20px;
+}

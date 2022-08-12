@@ -28,7 +28,8 @@ const Catalog = () => {
     /*{"CurentPage":1,"TotalPage":2,"PageSize":5,"TotalCount":10,"HasPrevius":false,"HasNext":true} */
 
     let active = pages.CurrentPage;
-    let items = [];
+    let items = [page];
+    console.log(pages);
     for (let number = 1; number <= pages.TotalPage; number++) {
         items.push(
             <Pagination.Item key={number} active={number === active}>

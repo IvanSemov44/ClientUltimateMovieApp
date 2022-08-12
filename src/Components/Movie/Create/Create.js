@@ -166,34 +166,6 @@ function Create() {
                     </Form.Group>
 
                     <Form.Group className="position-relative">
-                        <Form.Label>Image Url</Form.Label>
-                        <Form.Control
-                            id="imageUrl"
-                            type="text"
-                            name="imageUrl"
-                            {...formik.getFieldProps('imageUrl')}
-                            isInvalid={formik.touched.imageUrl && formik.errors.imageUrl}
-                            isValid={formik.touched.imageUrl && !formik.errors.imageUrl}
-                        />
-                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
-                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.imageUrl}</Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group className="position-relative">
-                        <Form.Label>Download Url</Form.Label>
-                        <Form.Control
-                            id="downloadUrl"
-                            type="text"
-                            name="downloadUrl"
-                            {...formik.getFieldProps('downloadUrl')}
-                            isInvalid={formik.touched.downloadUrl && formik.errors.downloadUrl}
-                            isValid={formik.touched.downloadUrl && !formik.errors.downloadUrl}
-                        />
-                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
-                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.downloadUrl}</Form.Control.Feedback>
-                    </Form.Group>
-
-                    <Form.Group className="position-relative">
                         <Form.Label>Country</Form.Label>
                         <Form.Control
                             id="country"
@@ -221,6 +193,35 @@ function Create() {
                         <Form.Control.Feedback type="invalid" tooltip>{formik.errors.category}</Form.Control.Feedback>
                     </Form.Group>
 
+
+                    <Form.Group className="position-relative">
+                        <Form.Label>Image Url</Form.Label>
+                        <Form.Control
+                            id="imageUrl"
+                            type="text"
+                            name="imageUrl"
+                            {...formik.getFieldProps('imageUrl')}
+                            isInvalid={formik.touched.imageUrl && formik.errors.imageUrl}
+                            isValid={formik.touched.imageUrl && !formik.errors.imageUrl}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.imageUrl}</Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group className="position-relative">
+                        <Form.Label>Download Url</Form.Label>
+                        <Form.Control
+                            id="downloadUrl"
+                            type="text"
+                            name="downloadUrl"
+                            {...formik.getFieldProps('downloadUrl')}
+                            isInvalid={formik.touched.downloadUrl && formik.errors.downloadUrl}
+                            isValid={formik.touched.downloadUrl && !formik.errors.downloadUrl}
+                        />
+                        <Form.Control.Feedback type="isvalid" tooltip></Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid" tooltip>{formik.errors.downloadUrl}</Form.Control.Feedback>
+                    </Form.Group>
+                    
                     <Form.Group className="position-relative">
                         <Form.Label>Trailer Url</Form.Label>
                         <Form.Control
