@@ -1,9 +1,9 @@
 .div-viewItem{
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
-    width: auto;
-    margin-top: 30px;
+    align-items: center;
+    width: 1000px;
+
 }
 .card-subtitle{
     padding:10px;
@@ -50,4 +50,22 @@
     display: flex;
     gap:20px;
     padding-inline:20px;
+}
+
+.btn-moreInfo{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.view-trailer-modal{
+    padding: auto;
+}
+
+
+.modal-content{
+    background-color:unset;
+    border: none;
+}
+.modal-dialog{
+    margin-left: 10%;
 }

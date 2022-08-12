@@ -63,8 +63,8 @@ const Trailer = () => {
                     : <></>
                 }
 
-                <Button>Current Page: {pages.CurentPage}</Button>
-                <Button>Total Page: {pages.TotalPage}</Button>
+                <Button variant="secondary" size="lg" disabled>Current Page: {pages.CurentPage}</Button>
+                <Button variant="secondary" size="lg" disabled>Total Page: {pages.TotalPage}</Button>
 
                 {
                     pages.HasNext

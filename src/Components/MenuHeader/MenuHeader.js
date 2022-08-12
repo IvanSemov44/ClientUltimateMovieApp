@@ -39,7 +39,7 @@ const MenuHeader = () => {
             <Login show={showLogin} close={() => setShowLogin(false)} />
             <Register show={showRegister} close={() => setShowRegister(false)} />
 
-            <Navbar key="xxl" bg="dark" variant="dark" expand="xxl" className="mb-3">
+            <Navbar sticky="top" key="xxl" bg="dark" variant="dark" expand="xxl" >
                 <Container fluid>
 
                     <LinkContainer type="button" to="/">
@@ -48,13 +48,20 @@ const MenuHeader = () => {
                             Ultimate Movie
                         </Navbar.Brand>
                     </LinkContainer>
-                    <Nav className="me-auto">
-                        <LinkContainer type="button" to="/Catalog">
-                            <Nav.Link>
-                                Catalog
-                            </Nav.Link>
-                        </LinkContainer>
-                    </Nav>
+                        <Nav className="justify-content-center nav-flex" >
+
+                            <LinkContainer type="button" to="/catalog">
+                                    <Nav.Link>
+                                        Catalog
+                                    </Nav.Link>
+                            </LinkContainer>
+
+                            <LinkContainer type="button" to="/trailer">
+                                    <Nav.Link>
+                                        Trailers
+                                    </Nav.Link>
+                            </LinkContainer>
+                        </Nav>
                     {user.username === ''
                         ?
                         <>

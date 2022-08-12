@@ -1,6 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import { LinkContainer } from 'react-router-bootstrap';
+import Button from 'react-bootstrap/Button';
+
+
+import ViewTrailer from '../../../Trailer/View/View';
 import './CardTrailer.css';
 
 
@@ -8,24 +12,24 @@ import './CardTrailer.css';
 function CardTrailer({
     data
 }) {
-    let img = "https://media.comicbook.com/files/img/default-movie.png";
-    if (data.ImageUrl !== "") {
-        img = data.imageUrl;
+
+    const [trailer, setTrailer] = useState(false);
+
+    function trailerHandler() {
+        setTrailer(true);
     }
 
     return (
         <div className="zoom">
-            <LinkContainer to={"/view/" + data.id}>
+            <ViewTrailer movie={data} show={trailer} onHide={() => setTrailer(false)} />
+            <Button variant="non" classame="btn-for-view" onClick={trailerHandler}>
                 <Card bg="dark" text="white" className="movie-card-trailer" style={{ width: '18rem' }}>
-                    <Card.Img className="cardImg" variant="top" src={img} />
-                    <Card.Body>
-                        <Card.Title>{data.title}({data.year})</Card.Title>
-                        <Card.Text bsPrefix='newClassForText'>{data.descriptions}
-                        </Card.Text>
-                    </Card.Body>
-
+                    <Card.Img className="cardImg" variant="top" src={data.imageUrl} />
+                    <Card.ImgOverlay>
+                        <Card.Title className="card-trailer-text">Trailer: {data.title}({data.year})</Card.Title>
+                    </Card.ImgOverlay>
                 </Card>
-            </LinkContainer>
+            </Button>
         </div>
     );
 }
