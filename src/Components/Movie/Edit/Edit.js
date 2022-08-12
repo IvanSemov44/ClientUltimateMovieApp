@@ -90,7 +90,7 @@ function Edit() {
 
                 })}
             onSubmit={(values, { setSubmiting }) => {
-                MovieService.updateMovie({ ...values, id: movieId },user.token)
+                MovieService.updateMovie({ ...values, id: movieId, MovieOwnerId:user.id },user.token)
                     .then(response => {
                         console.log(response)
                         navigate(`/view/${movieId}`, { replace: true })

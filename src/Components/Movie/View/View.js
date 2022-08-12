@@ -64,21 +64,11 @@ function View() {
 
                     <Card.Subtitle className="card-view-subtitle">Description:{movie.descriptions}</Card.Subtitle>
 
-                    {
-                        movie.trailerUrl !== ""
-                            ? < Card.Subtitle className="card-view-subtitle">Trailer</Card.Subtitle>
-                            : ""
-                    }
-                    {
-                        movie.imageUrl !== ""
-                            ? <Card.Img src={movie.imageUrl} alt="Movie Picter" className='imgView' />
-                            : <Card.Img src={deaultMovieImg} alt="Movie Picter" className='imgView' />
-                    }
+                    <Card.Subtitle className="card-view-subtitle view-trailer">Trailer</Card.Subtitle>
+                    <iframe width="100%" height="480" src={movie.trailerUrl} title={movie.title} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-                    <iframe width="100%" height="480" src="https://www.youtube.com/embed/4YVI2JRhXU8" title="Avicii, Calvin Harris, Kygo, Alok, Robin Schulz, David Guetta, Gryffin - Summer Vibes Mix #138" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-                    <Card.Subtitle className="card-view-subtitle">Category: {movie.category}</Card.Subtitle>
+                    {console.log(movie.trailerUrl)}
+                    {/* <Card.Subtitle className="card-view-subtitle">Category: {movie.category}</Card.Subtitle>
 
                     <Card.Subtitle className="card-view-subtitle">Long: No suport for now </Card.Subtitle>
 
@@ -86,7 +76,7 @@ function View() {
 
                     <Card.Subtitle className="card-view-subtitle">Size: No suport for now </Card.Subtitle>
 
-                    <Card.Subtitle className="card-view-subtitle">Imgd: No suport for now</Card.Subtitle>
+                    <Card.Subtitle className="card-view-subtitle">Imgd: No suport for now</Card.Subtitle> */}
 
                     {user.id === movie.movieOwnerId
                         ?
