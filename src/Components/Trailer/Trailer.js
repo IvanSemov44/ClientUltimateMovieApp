@@ -7,14 +7,14 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 import Button from "react-bootstrap/Button";
 
-import * as movieService from "../../../service/MovieService";
+import * as movieService from "../../service/MovieService";
 
-import CardCom from "../Card/MovieCard/Card";
+import CardTrailer from "../Movie/Card/TrailerCard/CardTrailer";
 
-import "../Catalog/Catalog.css";
+import "../Trailer/Trailer.css";
 
 
-const Catalog = () => {
+const Trailer = () => {
     const [movies, setMovies] = useState({});
     const [pages, setPages] = useState('');
     const param = useParams();
@@ -40,26 +40,26 @@ const Catalog = () => {
     }, [page]);
 
     function nextPage() {
-        navigate("/catalog/" + (Number(page) + 1), { replace: true });
+        navigate("/trailer/" + (Number(page) + 1), { replace: true });
     }
     function previousPage() {
-        navigate("/catalog/" + (Number(page) - 1), { replace: true });
+        navigate("/trailer/" + (Number(page) - 1), { replace: true });
     }
 
     return (
         <>
 
-            <div className="div-catalog-movie">
+            <div className="div-trailer-movie">
                 {
                     movies.length > 0
-                        ? movies.map(x => <CardCom key={x.id} data={x}></CardCom>)
+                        ? movies.map(x => <CardTrailer key={x.id} data={x}></CardTrailer>)
                         : <p>No Movie in Database</p>
                 }
             </div>
 
-            <div className="catalog-button">
+            <div className="trailer-button">
                 {pages.HasPrevius
-                    ? <FontAwesomeIcon className="catalog-icon" onClick={previousPage} icon={faAngleLeft} />
+                    ? <FontAwesomeIcon className="trailer-icon" onClick={previousPage} icon={faAngleLeft} />
                     : <></>
                 }
 
@@ -68,11 +68,11 @@ const Catalog = () => {
 
                 {
                     pages.HasNext
-                        ? <FontAwesomeIcon className="catalog-icon" onClick={nextPage} icon={faAngleRight} />
+                        ? <FontAwesomeIcon className="trailer-icon" onClick={nextPage} icon={faAngleRight} />
                         : <></>
                 }
             </div>
         </>
     )
 }
-export default Catalog;
+export default Trailer;

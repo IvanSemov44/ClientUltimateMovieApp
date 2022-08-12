@@ -91,14 +91,14 @@ function View() {
                         user.id && movie.downloadUrl !== undefined
                             ?
                             <>
-                                <a href={movie.downloadUrl} target="_parent">
+                                    <a href={movie.downloadUrl} target="_backet">
                                     <Button variant="outline-success" size="lg">
                                         Download
                                     </Button>
                                 </a>
                                 {movie.subtitleUrl !== "No " && movie.subtitleUrl !== undefined
                                     ?
-                                    <a href={movie.subtitleUrl} target="_parent">
+                                    <a href={movie.subtitleUrl} target="_backet">
                                         <Button variant="outline-info" size="lg">Subtitle</Button>
                                     </a>
                                     : <></>

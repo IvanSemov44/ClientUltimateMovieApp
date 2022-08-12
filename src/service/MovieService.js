@@ -19,7 +19,7 @@ export const getMoviesByPageBody = (page) => {
 }
 
 export const getMoviesByMovieOwner = (token) => {
-  return(  fetch(url+"movies", {
+    return (fetch(url + "movies", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -27,7 +27,8 @@ export const getMoviesByMovieOwner = (token) => {
         }
     })
         .then(response => response.json())
-)}
+    )
+}
 
 export const getMovie = (id) => {
     return (
@@ -46,7 +47,7 @@ export const createMovie = (data, token) => {
             },
             body: JSON.stringify(data)
         })
-            .then(response =>response.json())
+            .then(response => response.json())
     )
 }
 

@@ -1,4 +1,4 @@
-.div-catalog-movie {
+.div-trailer-movie {
     height: 1050px;
     display: flex;
     flex-wrap: wrap;
@@ -8,11 +8,11 @@
 
 }
 
-.catalog-icon {
+.trailer-icon {
     font-size: 50px
 }
 
-.catalog-button {  
+.trailer-button {  
     display: flex;
     justify-content: center;
     gap: 30px;

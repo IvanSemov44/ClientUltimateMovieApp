@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 
 import * as movieService from "../../../service/MovieService";
 
-import CardCom from "../Card/MovieCard/Card";
+import CardCom from "../Card/Card";
 
 import "../Catalog/Catalog.css";
 

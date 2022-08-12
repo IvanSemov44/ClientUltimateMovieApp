@@ -6,7 +6,7 @@ import { useState, useEffect, useContext } from "react";
 
 import * as movieService from "../../../service/MovieService";
 import { AuthContext } from "../../../context/AuthContext";
-import CardCom from "../../Movie/Card/Card";
+import CardCom from "../../Movie/Card/MovieCard/Card";
 import "../../Movie/Catalog/Catalog.css";
 
 const Catalog = () => {

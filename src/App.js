@@ -9,6 +9,7 @@ import OffcanvasProvider  from "./context/OffcanvasContext";
 import MenuHeader from './Components/MenuHeader/MenuHeader';
 
 import Catalog from './Components/Movie/Catalog/Catalog';
+import Trailer from './Components/Trailer/Trailer';
 
 import Logout from "./Components/User/Logout/Logout";
 
@@ -30,8 +31,11 @@ function App() {
           <MenuHeader />
 
           <Routes>
-            <Route path="/" element={<Catalog />} />
+            <Route path="/" element={<Catalog />} />\
             <Route path="/catalog" element={<Catalog />} />
+            <Route path="/catalog/:pageId" element={<Catalog />} />
+            <Route path="/trailer" element={<Trailer />} />
+            <Route path="/trailer/:pageId" element={<Trailer />} />
 
             <Route path="mycatalog" element={<MyCatalog />} />
             <Route path="/create" element={<Create />} />
