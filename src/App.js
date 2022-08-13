@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { AuthProvider } from "./context/AuthContext";
 import OffcanvasProvider  from "./context/OffcanvasContext";
-
+import Welcome from "./Components/Welcome/Welcome";
 import MenuHeader from './Components/MenuHeader/MenuHeader';
 
 import Catalog from './Components/Movie/Catalog/Catalog';
@@ -32,7 +32,7 @@ function App() {
           <MenuHeader />
 
           <Routes>
-            <Route path="/" element={<Catalog />} />\
+            <Route path="/" element={<Welcome />} />\
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/catalog/:pageId" element={<Catalog />} />
 

@@ -58,8 +58,8 @@ const Catalog = () => {
                     : <></>
                 }
 
-                <Button>Current Page: {pages.CurentPage}</Button>
-                <Button>Total Page: {pages.TotalPage}</Button>
+                <Button disabled>Current Page: {pages.CurentPage}</Button>
+                <Button disabled>Total Page: {pages.TotalPage}</Button>
 
                 {
                     pages.HasNext

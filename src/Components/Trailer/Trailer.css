@@ -1,10 +1,11 @@
-.div-trailer-movie {
-    height: 750px;
+.div-welcome-movie {
+    height: 350px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px 30px;
     justify-content: space-evenly;
     padding-inline: 15px;
+    margin-top: 15px;
 
 }
 

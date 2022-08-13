@@ -15,6 +15,12 @@ export const getMoviesByPageBody = (page) => {
             .then(response => response.json())
     )
 }
+export const getLastMovies = () => {
+    return (
+        fetch(url + `?pageNumber=1&pageSize=4`)
+            .then(response => response.json())
+    )
+}
 
 export const getMoviesByMovieOwner = (token) => {
     return (fetch(url + "movies", {

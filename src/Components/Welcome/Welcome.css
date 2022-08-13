@@ -1,0 +1,22 @@
+.welcome-div {
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+    font-size: 60px;
+    color: white
+}
+
+.welcome-p {
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+    font-size: 30px;
+}
+
+.div-trailer-movie {
+    height: 750px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 30px;
+    justify-content: space-evenly;
+    padding-inline: 15px;
+
+}
