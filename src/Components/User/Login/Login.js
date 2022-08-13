@@ -14,6 +14,8 @@ import * as Yup from 'yup';
 import { AuthContext } from '../../../context/AuthContext';
 import * as UserService from '../../../service/UserService';
 
+import "../Login/Login.css"
+
 const Login = ({
     show,
     close
@@ -55,7 +57,6 @@ const Login = ({
                     .catch(
                         result => {
                             setShowToggle(true);
-                            console.log(result);
                             setErrorMessage(result.error);
                         }
                     );
@@ -66,11 +67,11 @@ const Login = ({
                     <Modal show={show} onHide={close}>
                         <Modal.Body>
                             <Toast show={showToggle} onClose={() => setShowToggle(false)} bg='danger' >
-                                <Toast.Body className={ 'Danger'}>
+                                <Toast.Body className={'Danger'}>
                                     {errorMessage}
                                 </Toast.Body>
                             </Toast>
-                            <Form onSubmit={formik.handleSubmit}>
+                            <Form className="login-text" onSubmit={formik.handleSubmit}>
 
                                 <Form.Group className="position-relative">
                                     <Form.Label htmlFor="username">Username</Form.Label>
@@ -102,7 +103,9 @@ const Login = ({
 
                                 </Form.Group>
 
-                                <Button type="submit">Login</Button>
+                                <Button size="lg" variant="success" type="submit">
+                                        Login
+                                </Button>
                             </Form>
                         </Modal.Body>
                     </Modal>

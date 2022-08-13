@@ -7,11 +7,12 @@ import { useState, useEffect, useContext } from "react";
 import * as movieService from "../../../service/MovieService";
 import { AuthContext } from "../../../context/AuthContext";
 import CardCom from "../../Movie/Card/MovieCard/Card";
+import {Spinner} from "../../Common/Spinner/Spinner";
+
 import "../../Movie/Catalog/Catalog.css";
 
 const Catalog = () => {
     const { user } = useContext(AuthContext);
-    console.log(user);
     const [movies, setMovies] = useState({});
     // const [pages, setPages] = useState('');
     // const param = useParams()
@@ -28,12 +29,10 @@ const Catalog = () => {
         // movieService.getMoviesByPageBody(page)
         //     .then(result => {
         //         setMovies(result)
-        //         console.log(result)
         //     });
 
         movieService.getMoviesByMovieOwner(user.token)
             .then(result => {
-                console.log(result)
                 setMovies(result)});
     }, []);
 
@@ -54,7 +53,7 @@ const Catalog = () => {
                 {
                     movies.length > 0
                         ? movies.map(x => <CardCom key={x.id} data={x}></CardCom>)
-                        : <p>No Movie in Database</p>
+                        : <Spinner/>
                 }
             </div>
             {/* <Pagination size="lg">{items}</Pagination> */}

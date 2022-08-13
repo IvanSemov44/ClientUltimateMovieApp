@@ -12,6 +12,7 @@ import * as movieService from "../../../service/MovieService";
 import CardCom from "../Card/Card";
 
 import "../Catalog/Catalog.css";
+import { Spinner } from "../Common/Spinner/Spinner";
 
 
 const Catalog = () => {
@@ -21,22 +22,16 @@ const Catalog = () => {
     const navigate = useNavigate();
 
     let page = param.pageId;
-    console.log(page);
 
     if (page === undefined) {
         page = 1;
     }
-    console.log(page)
-
     useEffect(() => {
         movieService.getMoviesByPageHeader(page)
             .then(result => setPages(JSON.parse(result)));
 
         movieService.getMoviesByPageBody(page)
-            .then(result => {
-                setMovies(result)
-                console.log(result)
-            });
+            .then(result => setMovies(result));
     }, [page]);
 
     function nextPage() {
@@ -53,7 +48,7 @@ const Catalog = () => {
                 {
                     movies.length > 0
                         ? movies.map(x => <CardCom key={x.id} data={x}></CardCom>)
-                        : <p>No Movie in Database</p>
+                        : <Spinner />
                 }
             </div>
 

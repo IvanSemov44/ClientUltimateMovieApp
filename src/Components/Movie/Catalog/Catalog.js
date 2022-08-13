@@ -7,9 +7,11 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 import Button from "react-bootstrap/Button";
 
-import * as movieService from "../../../service/MovieService";
+import {Spinner} from "../../Common/Spinner/Spinner";
 
 import CardCom from "../Card/MovieCard/Card";
+
+import * as movieService from "../../../service/MovieService";
 
 import "../Catalog/Catalog.css";
 
@@ -21,12 +23,10 @@ const Catalog = () => {
     const navigate = useNavigate();
 
     let page = param.pageId;
-    console.log(page);
 
     if (page === undefined) {
         page = 1;
     }
-    console.log(page)
 
     useEffect(() => {
         movieService.getMoviesByPageHeader(page)
@@ -35,7 +35,6 @@ const Catalog = () => {
         movieService.getMoviesByPageBody(page)
             .then(result => {
                 setMovies(result)
-                console.log(result)
             });
     }, [page]);
 
@@ -53,7 +52,7 @@ const Catalog = () => {
                 {
                     movies.length > 0
                         ? movies.map(x => <CardCom key={x.id} data={x}></CardCom>)
-                        : <p>No Movie in Database</p>
+                        : <Spinner/>
                 }
             </div>
 

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import "../Register/Register.css";
 import * as UserService from '../../../service/UserService';
 
 const Register = ({
@@ -65,7 +66,6 @@ const Register = ({
                     .catch(
                         result => {
                             setShowToggle(true);
-                            console.log(Object.values(result));
                             setErrors(Object.values(result));
                         })
 
@@ -86,7 +86,7 @@ const Register = ({
                                 )
                             }
 
-                            <Form onSubmit={formik.handleSubmit}>
+                            <Form className="register-text" onSubmit={formik.handleSubmit}>
                                 <Form.Group className="position-relative">
                                     <Form.Label htmlFor="firstName">First Name</Form.Label>
                                     <Form.Control
@@ -175,7 +175,7 @@ const Register = ({
 
                                 </Form.Group>
 
-                                <Button type="submit">Register</Button>
+                                <Button size="lg" variant="success" type="submit">Register</Button>
                             </Form>
 
                         </Modal.Body>

@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 
-import ViewTrailer from '../../../Trailer/View/View';
+import ViewTrailer from '../View/View';
 import './CardTrailer.css';
 
 
