@@ -1,4 +1,4 @@
-const url = "http://localhost:5162/api/movie/";
+const url = "https://ultimatemovieapp.azurewebsites.net/api/movie/";
 
 
 const header = { 'Content-Type': 'application/json' };
