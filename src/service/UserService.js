@@ -1,4 +1,4 @@
-const url = "https://ultimatemovieapp.azurewebsites.net/api/authentication/";
+const url = "http://localhost:5162/api/authentication/";
 const header = { 'Content-Type': 'application/json' };
 
 
@@ -8,12 +8,12 @@ export async function register(data) {
         ...data,
         roles: ["User"]
     }
+
     const response = await fetch(url + "register", {
         method: "POST",
         headers: header,
         body: JSON.stringify(sentData)
     });
-
 
     if (response.ok === true) {
         return response
@@ -34,5 +34,4 @@ export async function login(data) {
     } else {
         throw await response.json();
     }
-
 }

@@ -23,7 +23,6 @@ function CardCom({
                         <Card.Text bsPrefix='newClassForText'>{data.descriptions}
                         </Card.Text>
                     </Card.Body>
-
                 </Card>
             </LinkContainer>
         </div>

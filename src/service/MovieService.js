@@ -1,17 +1,19 @@
-const url = "https://ultimatemovieapp.azurewebsites.net/api/movie/";
+const url = "http://localhost:5162/api/movie/";
+const pageSize = 8;
 
 
 const header = { 'Content-Type': 'application/json' };
 
 export const getMoviesByPageHeader = (page) => {
     return (
-        fetch(url + `?pageNumber=${page}&pageSize=8`)
+        fetch(url + `?pageNumber=${page}&pageSize=${pageSize}`)
             .then(response => response.headers.get('x-pagination'))
     )
 }
+
 export const getMoviesByPageBody = (page) => {
     return (
-        fetch(url + `?pageNumber=${page}&pageSize=8`)
+        fetch(url + `?pageNumber=${page}&pageSize=${pageSize}`)
             .then(response => response.json())
     )
 }
